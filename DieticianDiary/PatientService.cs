@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Warehouse;
 
 namespace DieticianDiary
 {
@@ -15,7 +11,7 @@ namespace DieticianDiary
             Patients = new List<Patient>();
         }
 
-        public int AddPatient()
+        public void AddPatient()
         {
             Patient patient = new Patient();
 
@@ -42,39 +38,89 @@ namespace DieticianDiary
             Console.Write("Phone number: ");
             var phoneNumber = Console.ReadLine();
 
+            Console.Write("Weight: ");
+            var weight = Console.ReadLine();
+            int patientWeight;
+            Int32.TryParse(id, out patientWeight);
+
+            Console.Write("Height: ");
+            var height = Console.ReadLine();
+            int patientHeight;
+            Int32.TryParse(id, out patientHeight);
+
             patient.Id = patientId;
             patient.FirstName = firstName;
             patient.LastName = lastName;
             patient.Age = patientAge;
             patient.EmailAdress = emailAdress;
             patient.PhoneNumber = phoneNumber;
+            patient.Weight = patientWeight;
+            patient.Height = patientHeight;
 
             Patients.Add(patient);
-            return patientId;
         }
 
-        public int RemovePatientView()
+        public void RemovePatient()
         {
             Console.Write("Please enter id for patient you want to remove: ");
-            var patientId = Console.ReadKey();
+
+            var patientId = Console.ReadLine();
             int id;
-            Int32.TryParse(patientId.KeyChar.ToString(), out id);
+            Int32.TryParse(patientId.ToString(), out id);
 
-            return id;
-        }
-
-        public void RemovePatient(int removeId)
-        {
             Patient patientToRemove = new Patient();
+
             foreach (var patient in Patients)
             {
-                if (patient.Id == removeId)
+                if (patient.Id == id);
                 {
                     patientToRemove = patient;
                     break;
                 }
             }
+
             Patients.Remove(patientToRemove);
+        }
+     
+        public void GetPatientById()
+        {
+            Console.Write("Please enter id for patient you want to show: ");
+
+            var patientId = Console.ReadLine();
+            int id;
+            Int32.TryParse(patientId.ToString(), out id);
+
+            Patient patientToShow = new Patient();
+
+            foreach (var patient in Patients)
+            {
+                if (patient.Id == id)
+                {
+                    patientToShow = patient;
+                    break;
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine($"Patient id: {patientToShow.Id}");
+            Console.WriteLine($"Patient first name: {patientToShow.FirstName}");
+            Console.WriteLine($"Patient last name: {patientToShow.LastName}");
+            Console.WriteLine($"Patient last name: {patientToShow.PhoneNumber}");
+            Console.WriteLine($"Patient phone number: {patientToShow.EmailAdress}");
+            Console.WriteLine($"Patient age: {patientToShow.Age}");
+            Console.WriteLine($"Patient weight: {patientToShow.Weight}");
+            Console.WriteLine($"Patient height: {patientToShow.Height}");
+        }
+
+        public void GetAllPatients()
+        {
+            List<Patient> patientsToShow = new List<Patient>();
+            foreach (var patient in Patients)
+            {
+                patientsToShow.Add(patient);
+            }
+
+            Console.WriteLine(patientsToShow.ToStringTable(new[] {"Id", "First Name", "Last Name"}, a=>a.Id, a=>a.FirstName, a=>a.LastName));
         }
     }
 }
