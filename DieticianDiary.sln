@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DieticianDiary", "DieticianDiary\DieticianDiary.csproj", "{74788F34-E9FF-49A7-B75A-2CD1A60EA2C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DieticianDiary", "DieticianDiary\DieticianDiary.csproj", "{74788F34-E9FF-49A7-B75A-2CD1A60EA2C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DieticianDiary.App", "DieticianDiary.App\DieticianDiary.App.csproj", "{0D15816F-B4F4-4551-8C39-BDF34FD62B8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DieticianDiary.Domain", "DieticianDiary.Domain\DieticianDiary.Domain.csproj", "{5147E036-7865-4797-808D-49F9F1965B23}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{74788F34-E9FF-49A7-B75A-2CD1A60EA2C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74788F34-E9FF-49A7-B75A-2CD1A60EA2C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74788F34-E9FF-49A7-B75A-2CD1A60EA2C6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D15816F-B4F4-4551-8C39-BDF34FD62B8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D15816F-B4F4-4551-8C39-BDF34FD62B8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D15816F-B4F4-4551-8C39-BDF34FD62B8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D15816F-B4F4-4551-8C39-BDF34FD62B8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5147E036-7865-4797-808D-49F9F1965B23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5147E036-7865-4797-808D-49F9F1965B23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5147E036-7865-4797-808D-49F9F1965B23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5147E036-7865-4797-808D-49F9F1965B23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

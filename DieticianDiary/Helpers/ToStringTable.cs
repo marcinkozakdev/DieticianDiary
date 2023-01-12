@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace Warehouse
+namespace DieticianDiary.Helpers
 {
     public static class TableParser
     {
@@ -10,7 +10,7 @@ namespace Warehouse
           string[] columnHeaders,
           params Func<T, object>[] valueSelectors)
         {
-            return ToStringTable(values.ToArray(), columnHeaders, valueSelectors);
+            return values.ToArray().ToStringTable(columnHeaders, valueSelectors);
         }
 
         public static string ToStringTable<T>(
@@ -38,7 +38,7 @@ namespace Warehouse
                 }
             }
 
-            return ToStringTable(arrValues);
+            return arrValues.ToStringTable();
         }
 
         public static string ToStringTable(this string[,] arrValues)

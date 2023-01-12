@@ -1,8 +1,9 @@
-﻿namespace DieticianDiary
+﻿using DieticianDiary.Domain.Common;
+
+namespace DieticianDiary.Domain.Entity
 {
-    public class Patient
+    public class Patient : BaseEntity
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }

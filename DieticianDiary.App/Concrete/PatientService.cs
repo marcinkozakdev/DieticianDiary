@@ -1,8 +1,9 @@
-﻿using Warehouse;
+﻿using DieticianDiary.App.Common;
+using DieticianDiary.Domain.Entity;
 
-namespace DieticianDiary
+namespace DieticianDiary.App
 {
-    public class PatientService
+    public class PatientService : BaseService<Patient>
     {
         public List<Patient> Patients { get; set; }
 
