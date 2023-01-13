@@ -1,8 +1,15 @@
 ﻿using DieticianDiary;
+using DieticianDiary.App;
+using DieticianDiary.App.Abstract;
+using DieticianDiary.App.Concrete;
+using DieticianDiary.App.Managers;
+using DieticianDiary.Domain.Entity;
 
 MenuActionService actionService = new MenuActionService();
-PatientService patientService = new PatientService();
-actionService = Initialize(actionService);
+PatientService itemService = new PatientService();
+ItemManager itemManager = new ItemManager(actionService);
+
+
 
 Console.WriteLine("Welcome to Dietician Diary app!");
 while (true)
@@ -22,7 +29,7 @@ while (true)
     switch (operation.KeyChar)
     {
         case '1':
-            patientService.AddPatient();
+            var newId = itemManager.AddPatient();
             break;
         case '2':
             patientService.RemovePatient();

@@ -11,6 +11,15 @@ namespace DieticianDiary.App.Common
             Patients = new List<T>();
         }
 
+        public int GetLastId()
+        {
+            int lastId;
+            if (Patients.Any())
+                lastId = Patients.OrderBy(p => p.Id).LastOrDefault().Id;  
+            else lastId = 0;
+            return lastId;
+        }
+
         public int AddPatient(T patient)
         {
             Patients.Add(patient);
@@ -20,6 +29,12 @@ namespace DieticianDiary.App.Common
         public List<T> GetAllPatients(T patient)
         {
             return Patients;
+        }
+
+        public int GetPatient(T patient)
+        {
+            var entity = Patients.FirstOrDefault(p => p.Id == patient.Id);
+            return entity.Id;
         }
 
         public void RemovePatient(T patient)
