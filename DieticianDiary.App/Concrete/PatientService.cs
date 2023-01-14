@@ -14,9 +14,9 @@ namespace DieticianDiary.App
 
         public void AddPatient()
         {
-            Patient patient = new Patient();
-
             Console.WriteLine("Please enter patient information: ");
+            var lastId = _patientService.GetLastId();
+
             Console.Write("Id: ");
             var id = Console.ReadLine();
             int patientId;
@@ -29,9 +29,9 @@ namespace DieticianDiary.App
             var lastName = Console.ReadLine();
 
             Console.Write("Age: ");
-            var age = Console.ReadLine();
-            int patientAge;
-            Int32.TryParse(id, out patientAge);
+            var patientAge = Console.ReadLine();
+            int age;
+            Int32.TryParse(id, out age);
 
             Console.Write("Email adress: ");
             var emailAdress = Console.ReadLine();
@@ -40,23 +40,16 @@ namespace DieticianDiary.App
             var phoneNumber = Console.ReadLine();
 
             Console.Write("Weight: ");
-            var weight = Console.ReadLine();
-            int patientWeight;
-            Int32.TryParse(id, out patientWeight);
+            var patientWeight = Console.ReadLine();
+            int weight;
+            Int32.TryParse(id, out weight);
 
             Console.Write("Height: ");
-            var height = Console.ReadLine();
-            int patientHeight;
-            Int32.TryParse(id, out patientHeight);
+            var patientHeight = Console.ReadLine();
+            int height;
+            Int32.TryParse(id, out height);
 
-            patient.Id = patientId;
-            patient.FirstName = firstName;
-            patient.LastName = lastName;
-            patient.Age = patientAge;
-            patient.EmailAdress = emailAdress;
-            patient.PhoneNumber = phoneNumber;
-            patient.Weight = patientWeight;
-            patient.Height = patientHeight;
+            Patient patient = new Patient(lastId + 1, firstName, lastName, phoneNumber, emailAdress, age, height, weight);
 
             Patients.Add(patient);
         }
@@ -73,7 +66,7 @@ namespace DieticianDiary.App
 
             foreach (var patient in Patients)
             {
-                if (patient.Id == id);
+                if (patient.Id == id) ;
                 {
                     patientToRemove = patient;
                     break;
@@ -82,7 +75,7 @@ namespace DieticianDiary.App
 
             Patients.Remove(patientToRemove);
         }
-     
+
         public void GetPatientById()
         {
             Console.Write("Please enter id for patient you want to show: ");
@@ -113,6 +106,7 @@ namespace DieticianDiary.App
             Console.WriteLine($"Patient height: {patientToShow.Height}");
         }
 
+
         public void GetAllPatients()
         {
             List<Patient> patientsToShow = new List<Patient>();
@@ -121,7 +115,12 @@ namespace DieticianDiary.App
                 patientsToShow.Add(patient);
             }
 
-            Console.WriteLine(patientsToShow.ToStringTable(new[] {"Id", "First Name", "Last Name"}, a=>a.Id, a=>a.FirstName, a=>a.LastName));
+            Console.WriteLine(patientsToShow.ToStringTable(new[] { "Id", "First Name", "Last Name" }, a => a.Id, a => a.FirstName, a => a.LastName));
+        }
+
+        public void UpdatePatient()
+        {
+
         }
     }
 }

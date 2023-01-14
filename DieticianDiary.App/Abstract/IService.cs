@@ -2,10 +2,13 @@
 {
     public interface IService<T>
     {
-        List<T> Patients { get; set; }
-        List<T> GetAllPatients(T patient);
-        int AddPatient(T patient);
-        int UpdatePatient(T patient);
-        void RemovePatient(T patient);
+        List<T> Items { get; set; }
+
+        List<T> GetAllItems(T patient);
+        int GetLastId();
+        T GetItemById (int id);
+        int AddItem(T patient);
+        int UpdateItem(T patient);
+        void RemoveItem(T patient);
     }
 }

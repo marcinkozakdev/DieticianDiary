@@ -12,6 +12,11 @@ namespace DieticianDiary.Domain.Entity
         public int Height { get; set; }
         public int Weight { get; set; }
 
+        public Patient()
+        {
+
+        }
+        
         public Patient(int id, string firstName, string lastName, string phoneNumber, string emailAdress, int age, int height, int weight)
         {
             id = Id;

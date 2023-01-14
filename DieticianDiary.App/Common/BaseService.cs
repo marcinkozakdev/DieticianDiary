@@ -5,49 +5,50 @@ namespace DieticianDiary.App.Common
 {
     public class BaseService<T> : IService<T> where T : BaseEntity
     {
-        public List<T> Patients { get; set; }
+        public List<T> Items { get; set; }
+
         public BaseService()
         {
-            Patients = new List<T>();
+            Items = new List<T>();
         }
 
         public int GetLastId()
         {
             int lastId;
-            if (Patients.Any())
-                lastId = Patients.OrderBy(p => p.Id).LastOrDefault().Id;  
+            if (Items.Any())
+                lastId = Items.OrderBy(p => p.Id).LastOrDefault().Id;
             else lastId = 0;
             return lastId;
         }
 
-        public int AddPatient(T patient)
+        public int AddItem(T item)
         {
-            Patients.Add(patient);
-            return patient.Id;
+            Items.Add(item);
+            return item.Id;
         }
 
-        public List<T> GetAllPatients(T patient)
+        public List<T> GetAllItems(T item)
         {
-            return Patients;
+            return Items;
         }
 
-        public int GetPatient(T patient)
+        public T GetItemById(int id)
         {
-            var entity = Patients.FirstOrDefault(p => p.Id == patient.Id);
-            return entity.Id;
+            var patient   = Items.FirstOrDefault(p => p.Id == id);
+            return patient;
         }
 
-        public void RemovePatient(T patient)
+        public void RemoveItem(T item)
         {
-            Patients.Remove(patient);
+            Items.Remove(item);
         }
 
-        public int UpdatePatient(T patient)
+        public int UpdateItem(T item)
         {
-            var entity = Patients.FirstOrDefault(p => p.Id == patient.Id);
+            var entity = Items.FirstOrDefault(p => p.Id == item.Id);
 
             if (entity != null)
-                entity = patient;
+                entity = item;
 
             return entity.Id;
         }

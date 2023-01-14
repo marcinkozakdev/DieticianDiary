@@ -9,10 +9,11 @@ namespace DieticianDiary.App.Concrete
         {
             Initialize();
         }
+
         public List<MenuAction> GetMenuActionByMenuName(string menuName)
         {
             List<MenuAction> result = new List<MenuAction>();
-            foreach (var menuAction in Patients)
+            foreach (var menuAction in Items)
             {
                 if (menuAction.MenuName == menuName)
                     result.Add(menuAction);
@@ -22,11 +23,12 @@ namespace DieticianDiary.App.Concrete
 
         private void Initialize()
         {
-            AddPatient(new MenuAction(1, "Add patient", "Main"));
-            RemovePatient(new MenuAction(2, "Remove patient", "Main"));
-            GetPatient(new MenuAction(3, "Show patient", "Main"));
-            GetAllPatients(new MenuAction(4, "List of patients", "Main"));
-            UpdatePatient(new MenuAction(5, "Update patient", "Main"));
+            AddItem(new MenuAction(0, "Close application", "Main"));
+            AddItem(new MenuAction(1, "Add patient", "Main"));
+            AddItem(new MenuAction(2, "Remove patient", "Main"));
+            AddItem(new MenuAction(3, "Show patient", "Main"));
+            AddItem(new MenuAction(4, "List of patients", "Main"));
+            AddItem(new MenuAction(5, "Update patient", "Main"));
         }
     }
 }

@@ -6,6 +6,7 @@ namespace DieticianDiary.Domain.Entity
     {
         public string Name { get; set; }
         public string MenuName { get; set; }
+
         public MenuAction(int id, string name, string menuName)
         {
             Id = id;
@@ -13,5 +14,4 @@ namespace DieticianDiary.Domain.Entity
             MenuName = menuName;
         }
     }
-
 }

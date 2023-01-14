@@ -1,19 +1,16 @@
-﻿using DieticianDiary;
-using DieticianDiary.App;
-using DieticianDiary.App.Abstract;
+﻿using DieticianDiary.App;
 using DieticianDiary.App.Concrete;
 using DieticianDiary.App.Managers;
-using DieticianDiary.Domain.Entity;
 
 MenuActionService actionService = new MenuActionService();
-PatientService itemService = new PatientService();
-ItemManager itemManager = new ItemManager(actionService);
-
-
+PatientService patientService = new PatientService();
+PatientManager patientManager = new PatientManager(actionService, patientService);
 
 Console.WriteLine("Welcome to Dietician Diary app!");
+
 while (true)
 {
+    Console.Clear();
     Console.WriteLine("\nPlease let me know what you want to do:");
     var mainMenu = actionService.GetMenuActionByMenuName("Main");
 
@@ -29,28 +26,19 @@ while (true)
     switch (operation.KeyChar)
     {
         case '1':
-            var newId = itemManager.AddPatient();
+            patientManager.AddPatient();
             break;
         case '2':
-            patientService.RemovePatient();
+            patientManager.GetPatient();
             break;
         case '3':
-            patientService.GetPatientById();
+            patientManager.UpdatePatient();
             break;
         case '4':
-            patientService.GetAllPatients();
+            patientManager.RemovePatient();
             break;
         default:
             Console.WriteLine("Action you entered doeas not exist");
             break;
     }
-}
-
-static MenuActionService Initialize(MenuActionService actionService)
-{
-    actionService.AddNewAction(1, "Add patient", "Main");
-    actionService.AddNewAction(2, "Remove patient", "Main");
-    actionService.AddNewAction(3, "Show patient", "Main");
-    actionService.AddNewAction(4, "List of patients", "Main");
-    return actionService;
 }
