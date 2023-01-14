@@ -4,7 +4,7 @@ using DieticianDiary.App.Managers;
 
 MenuActionService actionService = new MenuActionService();
 PatientService patientService = new PatientService();
-PatientManager patientManager = new PatientManager(actionService, patientService);
+PatientManager patientManager = new PatientManager(patientService);
 
 Console.WriteLine("Welcome to Dietician Diary app!");
 

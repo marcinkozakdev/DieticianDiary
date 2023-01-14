@@ -1,24 +1,21 @@
 ﻿using DieticianDiary.App.Abstract;
-using DieticianDiary.App.Concrete;
 using DieticianDiary.Domain.Entity;
 
 namespace DieticianDiary.App.Managers
 {
     public class PatientManager
     {
-        private readonly MenuActionService _actionService;
         private IService<Patient> _patientService;
 
-        public PatientManager(MenuActionService actionService, IService<Patient> patientService)
+        public PatientManager(IService<Patient> patientService)
         {
-            _actionService = actionService;
             _patientService = patientService;
         }
 
-        public Patient AddPatient(Patient patient)
+        public Patient AddPatient()
         {
+            Patient patient = new Patient();
             _patientService.AddItem(patient);
-            return patient;
         }
 
         public Patient UpdatePatient(Patient patient)

@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace DieticianDiary.Helpers
+namespace DieticianDiary.App.Helpers
 {
     public static class TableParser
     {
