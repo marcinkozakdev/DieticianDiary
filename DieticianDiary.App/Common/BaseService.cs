@@ -34,8 +34,8 @@ namespace DieticianDiary.App.Common
 
         public T GetItemById(int id)
         {
-            var patient   = Items.FirstOrDefault(p => p.Id == id);
-            return patient;
+            var item   = Items.FirstOrDefault(p => p.Id == id);
+            return item;
         }
 
         public void RemoveItem(T item)

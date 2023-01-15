@@ -23,12 +23,12 @@ namespace DieticianDiary.App.Concrete
 
         private void Initialize()
         {
-            AddItem(new MenuAction(0, "Close application", "Main"));
             AddItem(new MenuAction(1, "Add patient", "Main"));
-            AddItem(new MenuAction(2, "Remove patient", "Main"));
-            AddItem(new MenuAction(3, "Show patient", "Main"));
-            AddItem(new MenuAction(4, "List of patients", "Main"));
-            AddItem(new MenuAction(5, "Update patient", "Main"));
+            AddItem(new MenuAction(2, "Show patient", "Main"));
+            AddItem(new MenuAction(3, "Show all patients", "Main"));
+            AddItem(new MenuAction(4, "Update patient", "Main"));
+            AddItem(new MenuAction(5, "Remove patient", "Main"));
+            AddItem(new MenuAction(0, "Close application", "Main"));
         }
     }
 }

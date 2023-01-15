@@ -1,4 +1,5 @@
-﻿using DieticianDiary.App;
+﻿using DieticianDiary;
+using DieticianDiary.App;
 using DieticianDiary.App.Concrete;
 using DieticianDiary.App.Managers;
 
@@ -10,8 +11,8 @@ Console.WriteLine("Welcome to Dietician Diary app!");
 
 while (true)
 {
-    Console.Clear();
     Console.WriteLine("\nPlease let me know what you want to do:");
+    Console.WriteLine();
     var mainMenu = actionService.GetMenuActionByMenuName("Main");
 
     for (int i = 0; i < mainMenu.Count; i++)
@@ -32,9 +33,12 @@ while (true)
             patientManager.GetPatient();
             break;
         case '3':
-            patientManager.UpdatePatient();
+            patientManager.GetAllPatients();
             break;
         case '4':
+            patientManager.UpdatePatient();
+            break;
+        case '5':
             patientManager.RemovePatient();
             break;
         default:

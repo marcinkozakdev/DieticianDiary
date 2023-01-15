@@ -1,13 +1,12 @@
-﻿using DieticianDiary.App.Abstract;
-using DieticianDiary.Domain.Entity;
+﻿using DieticianDiary.Domain.Entity;
 
 namespace DieticianDiary.App.Managers
 {
     public class PatientManager
     {
-        private IService<Patient> _patientService;
+        private readonly PatientService _patientService;
 
-        public PatientManager(IService<Patient> patientService)
+        public PatientManager(PatientService patientService)
         {
             _patientService = patientService;
         }
@@ -15,25 +14,36 @@ namespace DieticianDiary.App.Managers
         public Patient AddPatient()
         {
             Patient patient = new Patient();
-            _patientService.AddItem(patient);
-        }
-
-        public Patient UpdatePatient(Patient patient)
-        {
-            _patientService.UpdateItem(patient);
+            _patientService.CreatePatient(patient);
             return patient;
         }
 
-        public void RemovePatient(int id)
+        public Patient GetPatient()
         {
-            var patient = _patientService.GetItemById(id);
-            _patientService.RemoveItem(patient);
+            Patient patient = _patientService.GetPatientById();
+            _patientService.ReadPatientData(patient);
+            return patient;
         }
 
-        public Patient GetPatient(int id)
+        public List<Patient> GetAllPatients()
         {
-            var patient = _patientService.GetItemById(id);
+            List<Patient> patients = _patientService.GetAllPatients();
+            _patientService.ReadAllPatientsData();
+            return patients;
+        }
+
+        public Patient UpdatePatient()
+        {
+            Patient patient = _patientService.GetPatientById();
+            _patientService.UpdatePatientData(patient);
             return patient;
+        }
+
+        public void RemovePatient()
+        {
+            Patient patient = _patientService.GetPatientById();
+            _patientService.DeletePatient(patient);
         }
     }
 }
+

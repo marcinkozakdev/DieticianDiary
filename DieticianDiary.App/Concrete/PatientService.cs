@@ -1,4 +1,5 @@
-﻿using DieticianDiary.App.Common;
+﻿using DieticianDiary.App.Abstract;
+using DieticianDiary.App.Common;
 using DieticianDiary.App.Helpers;
 using DieticianDiary.Domain.Entity;
 
@@ -13,115 +14,113 @@ namespace DieticianDiary.App
             Patients = new List<Patient>();
         }
 
-        public void AddPatient()
+        public Patient CreatePatient(Patient patient)
         {
+            string firstName, lastName, emailAdress, sex;
+            int id, age, phoneNumber, weight, height;
+
             Console.WriteLine("Please enter patient information: ");
-            var lastId = _patientService.GetLastId();
 
             Console.Write("Id: ");
-            var id = Console.ReadLine();
-            int patientId;
-            Int32.TryParse(id, out patientId);
+            while (!Int32.TryParse(Console.ReadLine(), out id))
+                Console.WriteLine("Wrong data type, enter a numeric value,");
 
             Console.Write("First name: ");
-            var firstName = Console.ReadLine();
+            firstName = Console.ReadLine();
 
             Console.Write("Last name: ");
-            var lastName = Console.ReadLine();
+            lastName = Console.ReadLine();
 
             Console.Write("Age: ");
-            var patientAge = Console.ReadLine();
-            int age;
-            Int32.TryParse(id, out age);
+            while (!Int32.TryParse(Console.ReadLine(), out age))
+                Console.WriteLine("Wrong data type, enter a numeric value,");
 
             Console.Write("Email adress: ");
-            var emailAdress = Console.ReadLine();
+            emailAdress = Console.ReadLine();
 
             Console.Write("Phone number: ");
-            var phoneNumber = Console.ReadLine();
+            while (!Int32.TryParse(Console.ReadLine(), out phoneNumber))
+                Console.WriteLine("Wrong data type, enter a numeric value,");
+
+            Console.Write("Sex: ");
+            sex = Console.ReadLine();
 
             Console.Write("Weight: ");
-            var patientWeight = Console.ReadLine();
-            int weight;
-            Int32.TryParse(id, out weight);
+            while (!Int32.TryParse(Console.ReadLine(), out weight))
+                Console.WriteLine("Wrong data type, enter a numeric value,");
 
             Console.Write("Height: ");
-            var patientHeight = Console.ReadLine();
-            int height;
-            Int32.TryParse(id, out height);
+            while (!Int32.TryParse(Console.ReadLine(), out height))
+                Console.WriteLine("Wrong data type, enter a numeric value,");
 
-            Patient patient = new Patient(lastId + 1, firstName, lastName, phoneNumber, emailAdress, age, height, weight);
+            patient = new Patient();
+
+            patient.Id = id;
+            patient.FirstName = firstName;
+            patient.LastName = lastName;
+            patient.Age = age;
+            patient.Sex = sex;
+            patient.EmailAdress = emailAdress;
+            patient.PhoneNumber = phoneNumber;
+            patient.Weight = weight;
+            patient.Height = height;
 
             Patients.Add(patient);
+
+            return patient;
         }
 
-        public void RemovePatient()
+        public Patient ReadPatientData(Patient patient)
         {
-            Console.Write("Please enter id for patient you want to remove: ");
-
-            var patientId = Console.ReadLine();
-            int id;
-            Int32.TryParse(patientId.ToString(), out id);
-
-            Patient patientToRemove = new Patient();
-
-            foreach (var patient in Patients)
-            {
-                if (patient.Id == id) ;
-                {
-                    patientToRemove = patient;
-                    break;
-                }
-            }
-
-            Patients.Remove(patientToRemove);
-        }
-
-        public void GetPatientById()
-        {
-            Console.Write("Please enter id for patient you want to show: ");
-
-            var patientId = Console.ReadLine();
-            int id;
-            Int32.TryParse(patientId.ToString(), out id);
-
-            Patient patientToShow = new Patient();
-
-            foreach (var patient in Patients)
-            {
-                if (patient.Id == id)
-                {
-                    patientToShow = patient;
-                    break;
-                }
-            }
-
             Console.WriteLine();
-            Console.WriteLine($"Patient id: {patientToShow.Id}");
-            Console.WriteLine($"Patient first name: {patientToShow.FirstName}");
-            Console.WriteLine($"Patient last name: {patientToShow.LastName}");
-            Console.WriteLine($"Patient last name: {patientToShow.PhoneNumber}");
-            Console.WriteLine($"Patient phone number: {patientToShow.EmailAdress}");
-            Console.WriteLine($"Patient age: {patientToShow.Age}");
-            Console.WriteLine($"Patient weight: {patientToShow.Weight}");
-            Console.WriteLine($"Patient height: {patientToShow.Height}");
+            Console.WriteLine($"Patient id: {patient.Id}");
+            Console.WriteLine($"Patient first name: {patient.FirstName}");
+            Console.WriteLine($"Patient last name: {patient.LastName}");
+            Console.WriteLine($"Patient last name: {patient.PhoneNumber}");
+            Console.WriteLine($"Patient phone number: {patient.EmailAdress}");
+            Console.WriteLine($"Patient age: {patient.Age}");
+            Console.WriteLine($"Patient weight: {patient.Weight}");
+            Console.WriteLine($"Patient height: {patient.Height}");
+            
+            return patient;
         }
 
-
-        public void GetAllPatients()
+        public List<Patient> ReadAllPatientsData()
         {
-            List<Patient> patientsToShow = new List<Patient>();
-            foreach (var patient in Patients)
-            {
-                patientsToShow.Add(patient);
-            }
+           var patients =  Patients.ToList();
 
-            Console.WriteLine(patientsToShow.ToStringTable(new[] { "Id", "First Name", "Last Name" }, a => a.Id, a => a.FirstName, a => a.LastName));
+            Console.WriteLine(patients.ToStringTable(new[] { "Id", "First Name", "Last Name" }, a => a.Id, a => a.FirstName, a => a.LastName));
+
+            return patients;
+
         }
 
-        public void UpdatePatient()
+        public void DeletePatient(Patient patient)
         {
+            Patients.Remove(patient);
+        }
+        
+        public Patient GetPatientById()
+        {
+            int id;
+             Console.Write("Please enter patient Id: ");
 
+            while (!Int32.TryParse(Console.ReadLine(), out id))
+                Console.WriteLine("Wrong data type, enter a numeric value,");
+            var patient = Patients.FirstOrDefault(p => p.Id == id);
+
+            return patient;
+        }
+        
+        public List<Patient> GetAllPatients()
+        {
+            List<Patient> patients = Patients.ToList();
+            return patients;
+        }
+
+        public Patient UpdatePatientData(Patient patient)
+        {
+            return patient;
         }
     }
 }
