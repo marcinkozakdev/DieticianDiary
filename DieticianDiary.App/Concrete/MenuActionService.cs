@@ -29,6 +29,15 @@ namespace DieticianDiary.App.Concrete
             AddItem(new MenuAction(4, "Update patient", "Main"));
             AddItem(new MenuAction(5, "Remove patient", "Main"));
             AddItem(new MenuAction(0, "Close application", "Main"));
+
+            AddItem(new MenuAction(1, "First name", "Update Patient"));
+            AddItem(new MenuAction(2, "Last name", "Update Patient"));
+            AddItem(new MenuAction(3, "Phone number", "Update Patient"));
+            AddItem(new MenuAction(4, "Email address", "Update Patient"));
+            AddItem(new MenuAction(5, "Sex", "Update Patient"));
+            AddItem(new MenuAction(0, "Age", "Update Patient"));
+            AddItem(new MenuAction(0, "Height", "Update Patient"));
+            AddItem(new MenuAction(0, "Weight", "Update Patient"));
         }
     }
 }
