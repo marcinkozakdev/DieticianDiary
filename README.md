@@ -7,3 +7,8 @@
 
 ## General Information
 It is a console application designed for dieticians, which allows you to create a database of your patients. All features are available in the Features section. This application is built in Clean Architecture - there are two layers - the domain layer where all models are located and the application layer where services, interfaces and managers (for communication with the user) are implemented. 
+
+## Technologies Used
+- ASP.NET Core 6.0
+- LINQ
+- Clean architecture
