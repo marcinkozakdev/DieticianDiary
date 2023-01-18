@@ -1,4 +1,5 @@
 # DieticianDiary
+> Application for calculating calories and macronutrients with some additional features
 
 ## Table of Contents
 * [General Info](#general-information)
@@ -12,3 +13,11 @@ It is a console application designed for dieticians, which allows you to create 
 - ASP.NET Core 6.0
 - LINQ
 - Clean architecture
+
+## Features
+* Dodawanie/usuwanie pacjentów do bazy
+* Aktualizowanie danych pacjenta
+* Odczyt wszystkich pacjentów oraz ich danych
+
+## Inspiration
+Głównym celem projektu było stworzenie prostej aplikacji, dzięki której dietetyk będzie mógł szybko stworzyć bazę swoich pacjentów.
