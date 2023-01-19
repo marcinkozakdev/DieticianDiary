@@ -15,9 +15,9 @@ It is a console application designed for dieticians, which allows you to create 
 - Clean architecture
 
 ## Features
-* Dodawanie/usuwanie pacjentów do bazy
-* Aktualizowanie danych pacjenta
-* Odczyt wszystkich pacjentów oraz ich danych
+* Adding/deleting patients to the database.
+* Updating patient data
+* Reading all patients and their data.
 
 ## Inspiration
-Głównym celem projektu było stworzenie prostej aplikacji, dzięki której dietetyk będzie mógł szybko stworzyć bazę swoich pacjentów.
+The main goal of the project was to create a simple application that would allow a nutritionist to quickly create a database of his patients.
