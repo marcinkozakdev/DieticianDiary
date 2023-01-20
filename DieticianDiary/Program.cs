@@ -6,11 +6,20 @@ using DieticianDiary.App.Managers;
 MenuActionService actionService = new MenuActionService();
 PatientService patientService = new PatientService(actionService);
 PatientManager patientManager = new PatientManager(patientService);
+UserDataService userDataService = new UserDataService();
+UserDataManager userDataManager = new UserDataManager(userDataService, actionService);
 
-Console.WriteLine("Welcome to Dietician Diary app!");
+Console.ForegroundColor = ConsoleColor.DarkCyan;
+Console.WriteLine("Dietician Diary App!");
+Console.ResetColor();
 
 while (true)
 {
+    Console.Clear();
+    Console.ForegroundColor = ConsoleColor.DarkCyan;
+    Console.WriteLine("Dietician Diary App!");
+    Console.WriteLine("--------------------");
+    Console.ResetColor();
     Console.WriteLine("\nPlease let me know what you want to do:");
     Console.WriteLine();
     var mainMenu = actionService.GetMenuActionByMenuName("Main");
@@ -26,8 +35,11 @@ while (true)
 
     switch (operation.KeyChar)
     {
+        case '0':
+            Environment.Exit(0);
+            break;
         case '1':
-            patientManager.AddPatient();
+            userDataManager.SetUserData(actionService);
             break;
         case '2':
             patientManager.GetPatient();
