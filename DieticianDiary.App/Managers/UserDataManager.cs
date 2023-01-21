@@ -1,11 +1,5 @@
 ﻿using DieticianDiary.App.Concrete;
 using DieticianDiary.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DieticianDiary.App.Managers
 {
@@ -21,47 +15,32 @@ namespace DieticianDiary.App.Managers
             _actionService = actionService;
         }
 
-        public void SetUserData(MenuActionService actionService)
+        private UserData ReadUserDataFromXml()
         {
-            Console.Clear();
-            var userDataMenu = actionService.GetMenuActionByMenuName("UserDataMenu");
+            throw new NotImplementedException();
+        }
 
-            Console.WriteLine($"Your current data: \n\r\n{_userDataService.userData}");
-            Console.WriteLine();
-            for (int i = 0; i < userDataMenu.Count; i++)
-                Console.WriteLine($"{userDataMenu[i].Id}. {userDataMenu[i].Name}");
+        public void GoToUserData(MenuActionService actionService)
+        {
+            while (true)
+            {
+                actionService.MenuTitle("User Data Menu");
 
-            var chosenOption = Console.ReadKey();
-            Console.Clear();
+                if (_userDataService.userData.FirstName is null || _userDataService.userData.LastName is null || _userDataService.userData.EmailAddress is null)
+                    _userDataService.InputUserData();
 
-            if (chosenOption.KeyChar != '1')
-                return;
+                else
+                {
+                    _userDataService.ShowUserData();
 
-            string firstName, lastName, emailAddress, sex, specialization;
-            int id, phoneNumber;
+                    var operation = _actionService.ReadMenuAction("User Data Menu", "Please let me know what you want to do:");
 
-            Console.WriteLine("Please enter user information: ");
-
-            Console.Write("First name: ");
-            firstName = Console.ReadLine();
-
-            Console.Write("Last name: ");
-            lastName = Console.ReadLine();
-
-            Console.Write("Email adress: ");
-            emailAddress = Console.ReadLine();
-
-            Console.Write("Phone number: ");
-            while (!Int32.TryParse(Console.ReadLine(), out phoneNumber))
-                Console.WriteLine("Wrong data type, enter a numeric value,");
-
-            Console.Write("Sex: ");
-            sex = Console.ReadLine();
-
-            Console.Write("Specialization: ");
-            specialization = Console.ReadLine();
-
-            _userDataService.SetUserData(firstName, lastName, phoneNumber, emailAddress, sex, specialization);
+                    if (operation.KeyChar != '1')
+                        return;
+                    
+                    _userDataService.UpdateUserData();
+                }
+            }
         }
     }
 }
