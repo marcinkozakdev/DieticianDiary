@@ -64,8 +64,7 @@ namespace DieticianDiary.App.Concrete
 
         public void UpdateUserData()
         {
-            Console.Clear();
-            var operation = _actionService.ReadMenuAction("Update User", "Please let me know what you want to update:");
+            var operation = _actionService.ReadMenuAction("Update User", "\nPlease let me know what you want to update:");
             Console.WriteLine();
 
             switch (operation.KeyChar)
@@ -80,9 +79,10 @@ namespace DieticianDiary.App.Concrete
                     break;
                 case '3':
                     Console.Write("Phone number: ");
-                    int phoneNumber = userData.PhoneNumber;
+                    int phoneNumber;
                     while (!Int32.TryParse(Console.ReadLine(), out phoneNumber))
                         Console.WriteLine("Wrong data type, enter a numeric value,");
+                    userData.PhoneNumber = phoneNumber;
                     break;
                 case '4':
                     Console.Write("Email adress: ");
@@ -110,7 +110,6 @@ namespace DieticianDiary.App.Concrete
             userData.PhoneNumber = phoneNumber;
             userData.EmailAddress = emailAddress;
             userData.Sex = sex;
-            
             userData.Specialization = specialization;
         }
 

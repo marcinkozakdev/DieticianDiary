@@ -75,15 +75,14 @@ namespace DieticianDiary.App.Concrete
             var menu = GetMenuActionByMenuName(menuName);
 
             for (int i = 0; i < menu.Count; i++)
-            {
                 Console.WriteLine($"{menu[i].Id}. {menu[i].Name}");
-            }
 
             Underscore(question);
             Console.Write("\nYour choose: ");
             var operation = Console.ReadKey();
             Console.WriteLine();
             Underscore(question);
+            Console.WriteLine();
 
             return operation;
         }
