@@ -11,6 +11,7 @@ namespace DieticianDiary.App
     {
         private readonly MenuActionService _actionService;
         public List<Patient> Patients { get; set; }
+        public Patient patient { get; private set; }
 
         public PatientService(MenuActionService actionService)
         {
@@ -20,7 +21,7 @@ namespace DieticianDiary.App
 
         public Patient CreatePatient(Patient patient)
         {
-            string firstName, lastName, emailAdress, sex;
+            string firstName, lastName, emailAddress, sex;
             int id, age, phoneNumber, weight, height;
 
             Console.WriteLine("Please enter patient information: ");
@@ -40,7 +41,7 @@ namespace DieticianDiary.App
                 Console.WriteLine("Wrong data type, enter a numeric value,");
 
             Console.Write("Email adress: ");
-            emailAdress = Console.ReadLine();
+            emailAddress = Console.ReadLine();
 
             Console.Write("Phone number: ");
             while (!Int32.TryParse(Console.ReadLine(), out phoneNumber))
@@ -59,16 +60,7 @@ namespace DieticianDiary.App
 
             patient = new Patient();
 
-            patient.Id = id;
-            patient.FirstName = firstName;
-            patient.LastName = lastName;
-            patient.Age = age;
-            patient.Sex = sex;
-            patient.EmailAddress = emailAdress;
-            patient.PhoneNumber = phoneNumber;
-            patient.Weight = weight;
-            patient.Height = height;
-
+           SetPatientData(firstName, lastName, phoneNumber, emailAddress, sex, age );
             Patients.Add(patient);
 
             return patient;
@@ -83,6 +75,7 @@ namespace DieticianDiary.App
             Console.WriteLine($"Patient last name: {patient.PhoneNumber}");
             Console.WriteLine($"Patient phone number: {patient.EmailAddress}");
             Console.WriteLine($"Patient age: {patient.Age}");
+            Console.WriteLine($"Patient sex: {patient.Sex}");
             Console.WriteLine($"Patient weight: {patient.Weight}");
             Console.WriteLine($"Patient height: {patient.Height}");
             
@@ -181,5 +174,18 @@ namespace DieticianDiary.App
             }
             return patient;
         }
+
+        public void SetPatientData(string firstName, string lastName, int phoneNumber, string emailAddress, string sex, int age)
+        {
+            patient.FirstName = firstName;
+            patient.LastName = lastName;
+            patient.PhoneNumber = phoneNumber;
+            patient.EmailAddress = emailAddress;
+            patient.Sex = sex;
+            patient.Age = age;
+        }
+
+        
+
     }
 }
