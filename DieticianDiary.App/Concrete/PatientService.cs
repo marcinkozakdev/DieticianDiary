@@ -1,9 +1,11 @@
-﻿using DieticianDiary.App.Abstract;
-using DieticianDiary.App.Common;
+﻿using DieticianDiary.App.Common;
 using DieticianDiary.App.Concrete;
 using DieticianDiary.App.Helpers;
-using DieticianDiary.App.Managers;
 using DieticianDiary.Domain.Entity;
+using System.Diagnostics.Metrics;
+using System.Net.WebSockets;
+using System.Numerics;
+using System.Runtime.Intrinsics.X86;
 
 namespace DieticianDiary.App
 {
@@ -19,16 +21,18 @@ namespace DieticianDiary.App
             Patients = new List<Patient>();
         }
 
-        public Patient CreatePatient(Patient patient)
+        public Patient CreatePatient()
         {
             string firstName, lastName, emailAddress, sex;
             int id, age, phoneNumber, weight, height;
 
-            Console.WriteLine("Please enter patient information: ");
+            Console.Clear();
+            _actionService.MenuTitle("Add Patient to Database");
+            Messages.Notice("\nPlease enter patient information: ");
 
             Console.Write("Id: ");
             while (!Int32.TryParse(Console.ReadLine(), out id))
-                Console.WriteLine("Wrong data type, enter a numeric value,");
+                Messages.Negative("Wrong data type, enter a numeric value!");
 
             Console.Write("First name: ");
             firstName = Console.ReadLine();
@@ -38,97 +42,113 @@ namespace DieticianDiary.App
 
             Console.Write("Age: ");
             while (!Int32.TryParse(Console.ReadLine(), out age))
-                Console.WriteLine("Wrong data type, enter a numeric value,");
+                Messages.Negative("Wrong data type, enter a numeric value!");
 
             Console.Write("Email adress: ");
             emailAddress = Console.ReadLine();
 
             Console.Write("Phone number: ");
             while (!Int32.TryParse(Console.ReadLine(), out phoneNumber))
-                Console.WriteLine("Wrong data type, enter a numeric value,");
+                Messages.Negative("Wrong data type, enter a numeric value!");
 
             Console.Write("Sex: ");
             sex = Console.ReadLine();
 
             Console.Write("Weight: ");
             while (!Int32.TryParse(Console.ReadLine(), out weight))
-                Console.WriteLine("Wrong data type, enter a numeric value,");
+                Messages.Negative("Wrong data type, enter a numeric value!");
 
             Console.Write("Height: ");
             while (!Int32.TryParse(Console.ReadLine(), out height))
-                Console.WriteLine("Wrong data type, enter a numeric value,");
+                Messages.Negative("Wrong data type, enter a numeric value!");
 
             patient = new Patient();
-
-           SetPatientData(firstName, lastName, phoneNumber, emailAddress, sex, age );
+            SetPatientData(id, firstName, lastName, phoneNumber, emailAddress, sex, age, weight, height);
             Patients.Add(patient);
+
+            Messages.Positive($"\nPatient {patient.FirstName} + {patient.LastName} added to database!");
+            Console.ReadKey();
 
             return patient;
         }
 
-        public Patient ReadPatientData(Patient patient)
+        public Patient ReadPatientData()
         {
+            Console.Clear();
+            _actionService.MenuTitle("Show patient from database");
+            Patient patient = GetPatientById();
+            Messages.Notice($"\nCurrent patient data: ");
+            Console.Write($"{patient}");
             Console.WriteLine();
-            Console.WriteLine($"Patient id: {patient.Id}");
-            Console.WriteLine($"Patient first name: {patient.FirstName}");
-            Console.WriteLine($"Patient last name: {patient.LastName}");
-            Console.WriteLine($"Patient last name: {patient.PhoneNumber}");
-            Console.WriteLine($"Patient phone number: {patient.EmailAddress}");
-            Console.WriteLine($"Patient age: {patient.Age}");
-            Console.WriteLine($"Patient sex: {patient.Sex}");
-            Console.WriteLine($"Patient weight: {patient.Weight}");
-            Console.WriteLine($"Patient height: {patient.Height}");
-            
+            Messages.Notice("\nPress any key to return to patient menu...");
+            Console.ReadKey();
+
             return patient;
         }
 
         public List<Patient> ReadAllPatientsData()
         {
-           var patients =  Patients.ToList();
+            Console.Clear();
+            _actionService.MenuTitle("List of all patients: ");
+            List<Patient> getPatients = GetAllPatients();
+            var patients = getPatients.ToList();
 
             Console.WriteLine(patients.ToStringTable(new[] { "Id", "First Name", "Last Name" }, a => a.Id, a => a.FirstName, a => a.LastName));
+            Console.ReadKey();
 
             return patients;
 
         }
 
-        public void DeletePatient(Patient patient)
+        public void DeletePatient()
         {
+            Console.Clear();
+            _actionService.MenuTitle("Delete Patient");
+            Patient patient = GetPatientById();
             Patients.Remove(patient);
+            Messages.Positive($"\nPatient {patient.FirstName} {patient.LastName} has been removed!");
+            Messages.Notice("\nPress any key to return to patient menu...");
+            Console.ReadKey();
         }
-        
+
         public Patient GetPatientById()
         {
             int id;
-             Console.Write("Please enter patient Id: ");
-
+            Messages.Notice("\nEnter the id of the patient you want to see.");
+            Console.Write("Patient Id: ");
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Wrong data type, enter a numeric value,");
             var patient = Patients.FirstOrDefault(p => p.Id == id);
 
             return patient;
         }
-        
+
         public List<Patient> GetAllPatients()
         {
             List<Patient> patients = Patients.ToList();
             return patients;
         }
 
-        public Patient UpdatePatientData(Patient patient)
+        public Patient UpdatePatientData()
         {
-            Console.WriteLine("\nPlease let me know which property you want to update:");
-            Console.WriteLine();
+            Console.Clear();
+            _actionService.MenuTitle("Update patient data");
+            Patient patient = GetPatientById();
+            Messages.Notice("\nPlease let me know which property you want to update:");
             var updateMenu = _actionService.GetMenuActionByMenuName("Update Patient");
 
             for (int i = 0; i < updateMenu.Count; i++)
             {
                 Console.WriteLine($"{updateMenu[i].Id}. {updateMenu[i].Name}");
             }
-
-            Console.Write("\nYour choose: ");
+            var choice = "\nYour choice: ";
+            Messages.Underscore(choice);
+            Console.Write(choice);
             var updateProperty = Console.ReadKey();
-            Console.WriteLine("\n");
+            Console.WriteLine();
+            Messages.Underscore(choice);
+            Console.WriteLine();
+
 
             switch (updateProperty.KeyChar)
             {
@@ -153,7 +173,7 @@ namespace DieticianDiary.App
                 case '5':
                     Console.Write("Age: ");
                     int age = patient.Age;
-                    while(!Int32.TryParse(Console.ReadLine(), out age))
+                    while (!Int32.TryParse(Console.ReadLine(), out age))
                         Console.WriteLine("Wrong data type, enter a numeric value,");
                     break;
                 case '6':
@@ -172,20 +192,24 @@ namespace DieticianDiary.App
                     Console.WriteLine("Action you entered doeas not exist");
                     break;
             }
+
+            Messages.Positive($"\nPatient by id {patient.Id} Updated!");
+            Messages.Notice("\nPress any key to return to patient menu...");
+            Console.ReadKey();
             return patient;
         }
 
-        public void SetPatientData(string firstName, string lastName, int phoneNumber, string emailAddress, string sex, int age)
+        public void SetPatientData(int id, string firstName, string lastName, int phoneNumber, string emailAddress, string sex, int age, int height, int weight)
         {
+            patient.Id = id;
             patient.FirstName = firstName;
             patient.LastName = lastName;
             patient.PhoneNumber = phoneNumber;
             patient.EmailAddress = emailAddress;
             patient.Sex = sex;
             patient.Age = age;
+            patient.Height = height;
+            patient.Weight = weight;
         }
-
-        
-
     }
 }

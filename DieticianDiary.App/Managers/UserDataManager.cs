@@ -33,7 +33,7 @@ namespace DieticianDiary.App.Managers
                 {
                     _userDataService.ShowUserData();
 
-                    var operation = _actionService.ReadMenuAction("User Data Menu", "Please let me know what you want to do:");
+                    var operation = _actionService.ReadMenuAction("User Data Menu", "\nPlease let me know what you want to do:");
 
                     if (operation.KeyChar != '1')
                         return;

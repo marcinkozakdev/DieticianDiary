@@ -30,5 +30,18 @@ namespace DieticianDiary.Domain.Entity
             height = Height;
             weight = Weight;
         }
+
+        public override string ToString()
+        {
+            return 
+                "First name: " + FirstName
+                + "\r\nLast name: " + LastName
+                + "\r\nPhone number: " + PhoneNumber
+                + "\r\nEmail address: " + EmailAddress
+                + "\r\nSex: " + Sex
+                + "\r\nAge: " + Age
+                + "\r\nHeight: " + Height
+                + "\r\nWeight: " + Weight;
+        }
     }
 }

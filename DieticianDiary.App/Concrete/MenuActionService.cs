@@ -39,13 +39,16 @@ namespace DieticianDiary.App.Concrete
             AddItem(new MenuAction(4, "Email address", "Update User"));
             AddItem(new MenuAction(5, "Sex", "Update User"));
             AddItem(new MenuAction(6, "Specialization", "Update User"));
+            AddItem(new MenuAction(0, "Back to user data menu", "Update User"));
 
-            AddItem(new MenuAction(0, "Close application", "PatientDatabaseMenu"));
-            AddItem(new MenuAction(1, "Add patient", "PatientDatabaseMenu"));
-            AddItem(new MenuAction(2, "Show patient", "PatientDatabaseMenu"));
-            AddItem(new MenuAction(3, "Show all patients", "PatientDatabaseMenu"));
-            AddItem(new MenuAction(4, "Update patient", "PatientDatabaseMenu"));
-            AddItem(new MenuAction(5, "Remove patient", "PatientDatabaseMenu"));
+            AddItem(new MenuAction(0, "Back to patient data menu", "Patient Data Menu"));
+
+            AddItem(new MenuAction(1, "Add patient", "Patient Database Menu"));
+            AddItem(new MenuAction(2, "Show patient", "Patient Database Menu"));
+            AddItem(new MenuAction(3, "Show all patients", "Patient Database Menu"));
+            AddItem(new MenuAction(4, "Update patient", "Patient Database Menu"));
+            AddItem(new MenuAction(5, "Remove patient", "Patient Database Menu"));
+            AddItem(new MenuAction(0, "Back to main menu", "Patient Database Menu"));
 
             AddItem(new MenuAction(1, "First name", "Update Patient"));
             AddItem(new MenuAction(2, "Last name", "Update Patient"));
@@ -69,6 +72,7 @@ namespace DieticianDiary.App.Concrete
 
         public ConsoleKeyInfo ReadMenuAction(string menuName, string question)
         {
+            Underscore(question);
             Console.WriteLine(question);
             Underscore(question);
             Console.WriteLine();
