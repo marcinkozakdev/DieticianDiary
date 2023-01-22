@@ -1,4 +1,5 @@
-﻿using DieticianDiary.Domain.Entity;
+﻿using DieticianDiary.App.Helpers;
+using DieticianDiary.Domain.Entity;
 using Microsoft.VisualBasic;
 using System.Net.WebSockets;
 using System.Xml.Serialization;
@@ -20,12 +21,8 @@ namespace DieticianDiary.App.Concrete
         {
             string firstName, lastName, emailAddress, sex, specialization;
             int id, phoneNumber;
-
-            Console.WriteLine("No user data is available!");
-            string title = "Please enter user information:";
-            Console.WriteLine(title);
-            _actionService.Underscore(title);
-            Console.WriteLine();
+            Messages.Negative("No user data is available!");
+            Messages.Notice("\nPlease enter user information: ");
 
             id = 1;
 
@@ -53,13 +50,8 @@ namespace DieticianDiary.App.Concrete
 
         public void ShowUserData()
         {
-            string title = "Your current data:";
-            Console.WriteLine(title);
-            _actionService.Underscore(title);
-            Console.WriteLine();
+            Messages.Notice("\nYour current data:");
             Console.WriteLine($"{userData}");
-            _actionService.Underscore(title);
-            Console.WriteLine("\n");
         }
 
         public void UpdateUserData()
