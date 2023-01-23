@@ -1,5 +1,4 @@
 ﻿using DieticianDiary.App.Concrete;
-using DieticianDiary.Domain.Entity;
 
 namespace DieticianDiary.App.Managers
 {
@@ -13,11 +12,6 @@ namespace DieticianDiary.App.Managers
         {
             _userDataService = userDataService;
             _actionService = actionService;
-        }
-
-        private UserData ReadUserDataFromXml()
-        {
-            throw new NotImplementedException();
         }
 
         public void GoToUserData(MenuActionService actionService)

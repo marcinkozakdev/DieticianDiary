@@ -1,7 +1,6 @@
 ﻿using DieticianDiary.App.Common;
+using DieticianDiary.App.Helpers;
 using DieticianDiary.Domain.Entity;
-using System.Globalization;
-using System.Xml.Linq;
 
 namespace DieticianDiary.App.Concrete
 {
@@ -50,6 +49,9 @@ namespace DieticianDiary.App.Concrete
             AddItem(new MenuAction(5, "Remove patient", "Patient Database Menu"));
             AddItem(new MenuAction(0, "Back to main menu", "Patient Database Menu"));
 
+            AddItem(new MenuAction(0, "Enter id patient for updated", "Update Patient Menu"));
+            AddItem(new MenuAction(0, "Back to patient menu", "Update Patient Menu"));
+
             AddItem(new MenuAction(1, "First name", "Update Patient"));
             AddItem(new MenuAction(2, "Last name", "Update Patient"));
             AddItem(new MenuAction(3, "Phone number", "Update Patient"));
@@ -58,6 +60,7 @@ namespace DieticianDiary.App.Concrete
             AddItem(new MenuAction(6, "Age", "Update Patient"));
             AddItem(new MenuAction(7, "Height", "Update Patient"));
             AddItem(new MenuAction(8, "Weight", "Update Patient"));
+            AddItem(new MenuAction(0, "Back to update patient menu", "Update Patient"));
         }
 
         public void MenuTitle(string menuName)
@@ -65,38 +68,21 @@ namespace DieticianDiary.App.Concrete
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(menuName.ToUpper());
-            Underscore(menuName);
+            Messages.Underscore(menuName);
             Console.WriteLine("\n");
             Console.ResetColor();
         }
 
         public ConsoleKeyInfo ReadMenuAction(string menuName, string question)
         {
-            Underscore(question);
-            Console.WriteLine(question);
-            Underscore(question);
-            Console.WriteLine();
+            Messages.Notice(question);
             var menu = GetMenuActionByMenuName(menuName);
 
             for (int i = 0; i < menu.Count; i++)
                 Console.WriteLine($"{menu[i].Id}. {menu[i].Name}");
-
-            Underscore(question);
-            Console.Write("\nYour choose: ");
-            var operation = Console.ReadKey();
-            Console.WriteLine();
-            Underscore(question);
-            Console.WriteLine();
+            var operation =  Messages.Choice();
 
             return operation;
-        }
-
-        public void Underscore(string name)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            for (int i = 0; i < name.Length; i++)
-                Console.Write("-");
-            Console.ResetColor();
         }
     }
 }

@@ -4,11 +4,11 @@
     {
         List<T> Items { get; set; }
 
-        List<T> GetAllItems(T patient);
+        List<T> GetAllItems(T items);
         int GetLastId();
         T GetItemById (int id);
-        int AddItem(T patient);
-        int UpdateItem(T patient);
-        void RemoveItem(T patient);
+        int AddItem(T item);
+        int UpdateItem(T item);
+        void RemoveItem(T item);
     }
 }
