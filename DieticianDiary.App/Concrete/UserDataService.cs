@@ -1,7 +1,5 @@
 ﻿using DieticianDiary.App.Helpers;
 using DieticianDiary.Domain.Entity;
-using Microsoft.VisualBasic;
-using System.Net.WebSockets;
 using System.Xml.Serialization;
 
 namespace DieticianDiary.App.Concrete
@@ -83,7 +81,6 @@ namespace DieticianDiary.App.Concrete
                 case '5':
                     Console.Write("Sex: ");
                     userData.Sex = Console.ReadLine();
-                    
                     break;
                 case '6':
                     Console.Write("Sepcialization: ");
@@ -95,7 +92,7 @@ namespace DieticianDiary.App.Concrete
             }
         }
 
-        public void SetUserData(string firstName, string lastName, int phoneNumber, string emailAddress, string sex, string specialization)
+        private void SetUserData(string firstName, string lastName, int phoneNumber, string emailAddress, string sex, string specialization)
         {
             userData.FirstName = firstName;
             userData.LastName = lastName;

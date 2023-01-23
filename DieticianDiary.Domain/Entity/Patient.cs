@@ -1,16 +1,25 @@
 ﻿using DieticianDiary.Domain.Common;
+using System.Xml.Serialization;
 
 namespace DieticianDiary.Domain.Entity
 {
     public class Patient : BaseEntity
     {
+        [XmlElement("First Name")]
         public string FirstName { get; set; }
+        [XmlElement("Last Name")]
         public string LastName { get; set; }
+        [XmlElement("Phone number")]
         public int PhoneNumber { get; set; }
+        [XmlElement("Email Address")]
         public string EmailAddress { get; set; }
+        [XmlElement("Sex")]
         public string Sex { get; set; }
+        [XmlElement("Age")]
         public int Age { get; set; }
+        [XmlElement("Height")]
         public int Height { get; set; }
+        [XmlElement("Weight")]
         public int Weight { get; set; }
 
         public Patient()

@@ -4,7 +4,7 @@ using DieticianDiary.App.Managers;
 
 MenuActionService actionService = new MenuActionService();
 UserDataService userDataService = new UserDataService(actionService);
-PatientService patientService = new PatientService(actionService);
+PatientService patientService = new PatientService(@"C:\temp\patientsData.xml", actionService);
 PatientManager patientManager = new PatientManager(patientService, actionService);
 UserDataManager userDataManager = new UserDataManager(userDataService, actionService);
 
@@ -18,6 +18,8 @@ while (true)
     switch (operation.KeyChar)
     {
         case '0':
+            patientService.SaveItemsToXml("Patients", @"C:\temp\patientsData.xml");
+            userDataService.SaveUserDataToXml();
             Environment.Exit(0);
             break;
         case '1':
