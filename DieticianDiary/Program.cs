@@ -5,8 +5,10 @@ using DieticianDiary.App.Managers;
 MenuActionService actionService = new MenuActionService();
 UserDataService userDataService = new UserDataService(actionService);
 PatientService patientService = new PatientService(@"C:\temp\patientsData.xml", actionService);
+CalculateBmiService calculateBmiService = new CalculateBmiService();
 PatientManager patientManager = new PatientManager(patientService, actionService);
 UserDataManager userDataManager = new UserDataManager(userDataService, actionService);
+CalculateBmiManager calculateBmiManager = new CalculateBmiManager(actionService, calculateBmiService);
 
 while (true)
 {
@@ -29,7 +31,7 @@ while (true)
             patientManager.GoToPatientDatabase();
             break;
         case '3':
-            
+            calculateBmiManager.CalculateBMI();
             break;
         default:
             Console.WriteLine("Action you entered doeas not exist");

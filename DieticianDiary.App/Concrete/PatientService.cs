@@ -59,7 +59,7 @@ namespace DieticianDiary.App
             SetPatientData(id + 1, firstName, lastName, phoneNumber, emailAddress, sex, age, weight, height);
             Items.Add(patient);
 
-            Messages.Positive($"\nPatient {patient.FirstName} {patient.LastName} added to database!");
+            Messages.Positive($"Patient {patient.FirstName} {patient.LastName} by ID: {patient.Id} added to database!");
             Messages.Notice("\nPress any key to return to patient menu...");
             Console.ReadKey();
 
@@ -87,7 +87,7 @@ namespace DieticianDiary.App
             List<Patient> getPatients = GetAllPatients();
             var patients = getPatients.ToList();
 
-            Console.WriteLine(patients.ToStringTable(new[] { "Id", "First Name", "Last Name" }, a => a.Id, a => a.FirstName, a => a.LastName));
+            Console.WriteLine(patients.ToStringTable(new[] { "ID", "First Name", "Last Name" }, a => a.Id, a => a.FirstName, a => a.LastName));
             Messages.Notice("\nPress any key to return to patient menu...");
             Console.ReadKey();
 
@@ -101,7 +101,7 @@ namespace DieticianDiary.App
             _actionService.MenuTitle("Delete Patient");
             Patient patient = GetPatientById();
             Items.Remove(patient);
-            Messages.Positive($"\nPatient {patient.FirstName} {patient.LastName} has been removed!");
+            Messages.Positive($"Patient {patient.FirstName} {patient.LastName} by ID: {patient.Id} has been removed!");
             Messages.Notice("\nPress any key to return to patient menu...");
             Console.ReadKey();
         }
@@ -173,7 +173,7 @@ namespace DieticianDiary.App
                         break;
                 }
 
-                Messages.Positive($"\nPatient by id {patient.Id} Updated!");
+                Messages.Positive($"Patient by ID: {patient.Id} Updated!");
                 Messages.Notice("\nPress any key to return to patient menu...");
                 Console.ReadKey();
                 return patient;
@@ -183,8 +183,8 @@ namespace DieticianDiary.App
         private Patient GetPatientById()
         {
             int id;
-            Messages.Notice("\nEnter the id of the patient.");
-            Console.Write("Patient Id: ");
+            Messages.Notice("\nEnter the ID of the patient.");
+            Console.Write("Patient ID: ");
             while (!Int32.TryParse(Console.ReadLine(), out id))
                 Console.WriteLine("Wrong data type, enter a numeric value,");
             var patient = Items.FirstOrDefault(p => p.Id == id);
