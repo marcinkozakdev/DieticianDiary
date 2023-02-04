@@ -7,6 +7,7 @@ namespace DieticianDiary.App.Helpers
         public static void Positive(string message)
         {
             Underscore(message);
+            Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkGreen;
             Console.WriteLine(message.ToUpper());
             Underscore(message);
@@ -19,6 +20,17 @@ namespace DieticianDiary.App.Helpers
             Underscore(message);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.DarkRed;
+            Console.WriteLine(message.ToUpper());
+            Underscore(message);
+            Console.WriteLine("\n");
+            Console.ResetColor();
+        }
+
+        public static void Warning(string message)
+        {
+            Underscore(message);
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
             Console.WriteLine(message.ToUpper());
             Underscore(message);
             Console.WriteLine("\n");
